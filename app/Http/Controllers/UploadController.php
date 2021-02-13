@@ -13,6 +13,7 @@ class UploadController extends Controller
      */
     public function fileUpload()
     {
+        
         $files = File::files(public_path("uploads"));
         return view('upload', ['files'=>$files]);
     }
@@ -30,7 +31,9 @@ class UploadController extends Controller
         $request->validate([
             'file' => 'required|mimes:pdf,xlx,csv|max:2048',
         ]);
-        */
+        */if (!Auth::check()){
+            return abort(404);
+        }
         $fileName = $request->file->getClientOriginalName();  
         $request->file->move(public_path('uploads'), $fileName);
         return back()

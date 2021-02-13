@@ -24,6 +24,7 @@
                         </ul>
                     </div>
                 @endif
+                @if(Auth::check())
                 <form action="{{ route('file.upload.post') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -35,6 +36,7 @@
                         </div>
                     </div>
                 </form>
+                @endif
             </div>
         </div>
         <div class="col-md-10 text-dark">
